@@ -23,7 +23,7 @@ int main() {
                                                   repindex, leastcount, counter = 0, time[10], flag1, flag2, pos, faults = 0;
     float LFUrate, LRUrate, FIFOrate;
 
-    // LFU
+    
     printf("Enter the number of pages\n");
     scanf("%d", &n);
     printf("---------------------------------\n");
@@ -35,18 +35,19 @@ int main() {
     scanf("%d", &frameno);
     printf("---------------------------------\n");
 
+    // LFU
     for (i = 0; i < frameno; i++)
         frame[i] = -1;
-    printf("Page \tFrames\n");
-    printf("---------------------------------\n");
+    // printf("Page \tFrames\n");
+    // printf("---------------------------------\n");
     for (i = 0; i < n; i++){
-            printf("%d\t", page[i]);
+            // printf("%d\t", page[i]);
             flag = 0;
             for (j = 0; j < frameno; j++) {
                 if (page[i] == frame[j]) {
                     flag = 1;
                     count1[j]++;
-                    printf("No replacement\n");
+                    // printf("No replacement\n");
                     break;
                 }
             }
@@ -55,7 +56,7 @@ int main() {
                 count1[move] = 1;
                 move = (move + 1) % frameno;
                 count++;
-                print(frameno, frame);
+                // print(frameno, frame);
             }
             else if (flag == 0) {
                 repindex = 0;
@@ -70,11 +71,11 @@ int main() {
                 frame[repindex] = page[i];
                 count1[repindex] = 1;
                 count++;
-                print(frameno, frame);
+                // print(frameno, frame);
             }
         }
         LFUrate = ((float)count / (float)n)*100;
-    printf("%.2f%%", LFUrate);
+    printf("\nLFU Rate: %.2f%%", LFUrate);
 
     // LRU
     for(i = 0; i < frameno; ++i) {
@@ -113,16 +114,16 @@ int main() {
          frame[pos] = page[i];
          time[pos] = counter;
          }
-         printf("\n");
+        //  printf("\n");
         
          for(j = 0; j < frameno; ++j) {
-         printf("%d\t", frame[j]);
+        //  printf("%d\t", frame[j]);
          }
     }
-    printf("\n%d\n", n);
     LRUrate = ((float)faults / (float)n)*100;
-    printf("%.2f%%", LRUrate);
-
+    printf("\nLFU Rate: %.2f%%", LRUrate);
+    printf("\nPage \tFrames\n");
+    printf("---------------------------------");
     //FIFO
     int pageFaults = 0;
     int temp[frameno];
@@ -150,5 +151,5 @@ int main() {
             }
       }
       FIFOrate = ((float)pageFaults / (float)n)*100;
-      printf("%.2f%%", FIFOrate);
+      printf("\nFIFO Rate: %.2f%%", FIFOrate);
 }
